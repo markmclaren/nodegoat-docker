@@ -1,0 +1,7 @@
+# Local secrets
+.env
+
+# Upstream checkouts (clone per README)
+src/
+
+.DS_Store
