@@ -1,0 +1,12 @@
+#!/bin/bash
+# Run a class method inside a bootstrapped 1100CC (the same way 1100CC runs its Jobs):
+#   1100cc-run docker_setup    # Setup 1100CC, test accounts, schedule Jobs
+#   1100cc-run docker_demo     # 'Hello nodegoat' demo project
+set -euo pipefail
+
+CLASS="${1:?usage: 1100cc-run CLASS [METHOD]}"
+METHOD="${2:-run}"
+HOST="${SITE_HOST:-nodegoat.localhost}"
+
+exec runuser -u www-data -- php -d auto_prepend_file=/usr/local/lib/1100cc/cli.php \
+	/var/1100CC/APP/CORE/CMS/index.php "nodegoat;$HOST;;cms.;http://;0" "$CLASS" "$METHOD"

@@ -40,4 +40,12 @@ for i in $(seq 1 60); do
 	sleep 2
 done
 
+# Setup 1100CC, seed test users and schedule Jobs (docker-setup.php)
+1100cc-run docker_setup || echo "[docker-setup] FAILED, continuing (set APP_STATE=development and check the CMS log)"
+
+# 'Hello nodegoat' demo project (demo.php), skipped when it exists
+if [ "${SEED_DEMO:-1}" = "1" ]; then
+	1100cc-run docker_demo || echo "[docker-demo] FAILED, continuing"
+fi
+
 exec "$@"

@@ -128,6 +128,8 @@ RUN set -eux; \
 	chmod -R u=rX,g=rX,o= SAFE
 
 COPY --chmod=0755 docker/web-entrypoint.sh /usr/local/bin/web-entrypoint.sh
+COPY docker/cli.php docker/docker-setup.php docker/demo.php /usr/local/lib/1100cc/
+COPY docker/1100cc-run /usr/local/bin/1100cc-run
 
 ENV APP_STATE=production
 
